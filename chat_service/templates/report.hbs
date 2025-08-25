@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{direction}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2563eb, #7c3aed, #ec4899);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 16px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .section h2 {
+            color: #1e293b;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .risk-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .risk-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .risk-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .risk-score.low { color: #10b981; }
+        .risk-score.medium { color: #f59e0b; }
+        .risk-score.high { color: #ef4444; }
+        
+        .risk-label {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .factor {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .factor-name {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+        
+        .factor-value {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .recommendations {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .recommendations h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .recommendations li {
+            background: rgba(255,255,255,0.1);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .recommendations li::before {
+            content: "✓";
+            position: absolute;
+            left: 0.5rem;
+            top: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .timestamp {
+            margin-top: 1rem;
+            font-style: italic;
+        }
+        
+        .disclaimer {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        @media print {
+            body { padding: 0; }
+            .container { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{header.title}}</h1>
+            <p>{{header.subtitle}}</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>🩺 {{sections.riskAssessment.title}}</h2>
+                <div class="risk-overview">
+                    <div class="risk-card">
+                        <div class="risk-score {{riskData.label}}">{{riskData.score}}%</div>
+                        <div class="risk-label">{{riskData.label}} {{sections.riskAssessment.risk}}</div>
+                    </div>
+                    <div class="risk-card">
+                        <div class="risk-score">{{userData.age}}</div>
+                        <div class="risk-label">{{sections.userInfo.age}}</div>
+                    </div>
+                    <div class="risk-card">
+                        <div class="risk-score">{{userData.bmi}}</div>
+                        <div class="risk-label">BMI</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📊 {{sections.keyFactors.title}}</h2>
+                <div class="factors-grid">
+                    {{#each factors}}
+                    <div class="factor">
+                        <div class="factor-name">{{name}}</div>
+                        <div class="factor-value">{{value}} ({{impact}})</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            
+            {{#if labResults}}
+            <div class="section">
+                <h2>🧪 {{sections.labResults.title}}</h2>
+                <div class="factors-grid">
+                    {{#each labResults}}
+                    <div class="factor">
+                        <div class="factor-name">{{name}}</div>
+                        <div class="factor-value">{{value}} {{unit}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+            
+            <div class="recommendations">
+                <h3>💡 {{sections.recommendations.title}}</h3>
+                <ul>
+                    {{#each recommendations}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            
+            <div class="disclaimer">
+                <strong>{{sections.disclaimer.title}}:</strong> {{sections.disclaimer.text}}
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>{{footer.generatedBy}}</p>
+            <p class="timestamp">{{footer.timestamp}}</p>
+        </div>
+    </div>
+</body>
+</html>

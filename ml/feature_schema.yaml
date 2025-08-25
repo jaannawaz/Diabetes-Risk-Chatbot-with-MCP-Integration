@@ -1,0 +1,29 @@
+# Feature schema for Model Service input
+# Normalize client payloads to these names and types
+
+features:
+  gender:
+    type: categorical
+    allowed: [Male, Female]
+  age_years:
+    type: number
+    source: age
+  hypertension:
+    type: binary
+  heart_disease:
+    type: binary
+  smoking_history:
+    type: categorical
+    allowed: [never, current, former, not current, ever, No Info]
+  bmi:
+    type: number
+  hba1c_percent:
+    type: number
+    source: HbA1c_level
+  glucose_mg_dl:
+    type: number
+    source: blood_glucose_level
+
+label:
+  name: diabetes
+  type: binary
