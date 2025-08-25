@@ -23,8 +23,8 @@ A demo-quality, privacy-conscious assistant that:
 - Chat Service (Node/Express): `/chat` with language hint `auto|en|ar`
 - Web UI (React): EN/AR with RTL support
 
-## Extension (Objectives 7–11)
-Title: Enhanced Diabetes Assistant with Multi-Modal Inputs and Clinical Integration
+## Extension 
+
 - Multi-Modal Input: Upload labs (CSV/PDF mock), optional wearable data, EN/AR voice input → structured schema
 - Explainability: Dual SHAP modes (patient-friendly vs clinician charts), risk history trends
 - Precision Hooks: Mock `genomics.lookup(variant_id)` via MCP; document future VCF→annotation pipeline
